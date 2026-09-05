@@ -1,0 +1,94 @@
+{
+  "documents": [
+    {
+      "id": "ep-lenny-pmf-0-to-1-chunk-0",
+      "episode_id": "ep-lenny-pmf-0-to-1",
+      "source_title": "Lenny Rachitsky on How Today's Top Startups Found Product-Market Fit and Cold Starts",
+      "guest": "Lenny Rachitsky",
+      "url": "https://www.lennyspodcast.com/how-the-top-startups-found-product-market-fit",
+      "chunk_index": 0,
+      "content": "Lenny: In this episode, I synthesize insights from researching over 100 top tech companies on how they actually found product-market fit (PMF) in their 0-to-1 days.\n\nFinding product-market fit is not a binary light switch; it is a progressive journey with distinct signs. When you don't have PMF, the market is pushing you away. You're pushing water uphill. Customer acquisition is expensive, churn is brutal, and you have to constantly explain why your product is useful.\n\nWhen you hit true PMF, the market starts pulling product out of you. Customers get genuinely angry when your site goes down. You see organic word of mouth where users recommend your tool without incentives."
+    },
+    {
+      "id": "ep-lenny-pmf-0-to-1-chunk-1",
+      "episode_id": "ep-lenny-pmf-0-to-1",
+      "source_title": "Lenny Rachitsky on How Today's Top Startups Found Product-Market Fit and Cold Starts",
+      "guest": "Lenny Rachitsky",
+      "url": "https://www.lennyspodcast.com/how-the-top-startups-found-product-market-fit",
+      "chunk_index": 1,
+      "content": "ou hit true PMF, the market starts pulling product out of you. Customers get genuinely angry when your site goes down. You see organic word of mouth where users recommend your tool without incentives.\n\nHere are the three most reliable signals of true product-market fit across consumer and B2B products:\n1. A flat retention curve: After day 30 or day 90, cohort retention stabilizes and levels out asymptotically, rather than declining down to zero.\n2. Sustainable organic growth: At least 30% to 50% of new signups arrive via unprompted word-of-mouth or organic search.\n3. High willingness to pay or advocate: When asked Sean Ellis's canonical test 'How would you feel if you could no longer use this product?', at least 40% of active users answer 'very disappointed'.\n\nFor early-stage founders facing the cold start problem, doing things that don't scale\u2014like hand-onboarding your first 50 users, embedding yourself in niche communities, and listening obsessionally to customer friction\u2014remains the universal secret of early traction."
+    },
+    {
+      "id": "ep-shreyas-doshi-metrics-chunk-0",
+      "episode_id": "ep-shreyas-doshi-metrics",
+      "source_title": "Shreyas Doshi on High-Agency Product Management, Good vs. Great Metrics, and the LNO Framework",
+      "guest": "Shreyas Doshi",
+      "url": "https://www.lennyspodcast.com/shreyas-doshi-on-product-management-metrics-and-agency",
+      "chunk_index": 0,
+      "content": "Lenny: Welcome back. Today I have Shreyas Doshi, legendary product thinker, former product leader at Stripe, Twitter, and Google.\n\nShreyas: Thanks Lenny. Happy to be here.\n\nLenny: One of your most referenced teachings is the difference between vanity metrics, good metrics, and great metrics. How should product leaders think about their North Star?\n\nElena: Many PMs fall into the trap of optimizing for proxy metrics that are easy to move rather than metrics that reflect genuine customer value creation. A great metric has three properties: First, it captures the moment real customer value is experienced. Second, it aligns directly with business sustainability or revenue. Third, it is difficult to game through deceptive UI patterns or spammy notifications.\n\nLenny: Can you give an example of good vs great metrics?\n\nShreyas: Take an messaging app or collaboration tool. A poor vanity metric is 'Total Registered Accounts'. A good metric is 'Daily Active Users (DAU)'. But a great metric is 'Teams sending at least 50 messages per week with 3+ active members'. The great metric reflects team-level adoption and true workflow integration."
+    },
+    {
+      "id": "ep-shreyas-doshi-metrics-chunk-1",
+      "episode_id": "ep-shreyas-doshi-metrics",
+      "source_title": "Shreyas Doshi on High-Agency Product Management, Good vs. Great Metrics, and the LNO Framework",
+      "guest": "Shreyas Doshi",
+      "url": "https://www.lennyspodcast.com/shreyas-doshi-on-product-management-metrics-and-agency",
+      "chunk_index": 1,
+      "content": "is 'Daily Active Users (DAU)'. But a great metric is 'Teams sending at least 50 messages per week with 3+ active members'. The great metric reflects team-level adoption and true workflow integration.\n\nLenny: What about your LNO framework for PM time and resource management?\n\nShreyas: LNO stands for Leverage, Neutral, Overhead. \n- L tasks (High Leverage): Deliver outsized ROI if done exceptionally well (e.g. product strategy, core metric definition, positioning). These deserve 10x your effort.\n- N tasks (Neutral): Need to be done well, but doing them 10x better doesn't move the needle (e.g. routine sprint planning, documentation). Aim for solid B+ execution.\n- O tasks (Overhead): Administrative tasks that just need to be done with minimal effort or automated (e.g. status updates, filing expense reports). Do them fast, don't over-engineer."
+    },
+    {
+      "id": "ep-brian-balfour-loops-chunk-0",
+      "episode_id": "ep-brian-balfour-loops",
+      "source_title": "Brian Balfour on Why Product Growth Loops Beat Funnels, and Retention Foundations",
+      "guest": "Brian Balfour",
+      "url": "https://www.lennyspodcast.com/brian-balfour-on-growth-loops-vs-funnels",
+      "chunk_index": 0,
+      "content": "Lenny: Today my guest is Brian Balfour, founder and CEO of Reforge, former VP of Growth at HubSpot, and the pioneer of Growth Loops.\n\nBrian: Great to be here, Lenny. Excited to dive into systems thinking for growth.\n\nLenny: You famously argued that traditional marketing and sales funnels are broken and companies should focus on Growth Loops instead. Can you unpack that?\n\nBrian: The traditional funnel model\u2014Awareness, Acquisition, Activation, Retention, Revenue, Referral\u2014is linear. You pour money or effort into the top, people drop off at every stage, and whatever comes out at the bottom is lost unless you keep pouring more resources into the top. It creates unsustainable customer acquisition costs (CAC) as channels saturate.\n\nLenny: And how do Growth Loops change this dynamic?"
+    },
+    {
+      "id": "ep-brian-balfour-loops-chunk-1",
+      "episode_id": "ep-brian-balfour-loops",
+      "source_title": "Brian Balfour on Why Product Growth Loops Beat Funnels, and Retention Foundations",
+      "guest": "Brian Balfour",
+      "url": "https://www.lennyspodcast.com/brian-balfour-on-growth-loops-vs-funnels",
+      "chunk_index": 1,
+      "content": "bottom is lost unless you keep pouring more resources into the top. It creates unsustainable customer acquisition costs (CAC) as channels saturate.\n\nLenny: And how do Growth Loops change this dynamic?\n\nBrian: Growth Loops are closed systems where the input through one cycle generates an output that serves as the input for the next cycle. There are three dominant types of loops:\n1. Viral and Word of Mouth Loops: A user uses the product, and by nature of usage, exposes new users (e.g., Slack invites, Figma collaborative links, Zoom meetings).\n2. Content Loops: Users or company create content, search engines index it, new users discover it and sign up (e.g., Pinterest, TripAdvisor, Stack Overflow).\n3. Paid Loops: A customer pays you, you reinvest a portion of that revenue into paid ads to acquire another customer with positive unit economics.\n\nLenny: What is the most critical foundation before optimizing any growth loop?"
+    },
+    {
+      "id": "ep-brian-balfour-loops-chunk-2",
+      "episode_id": "ep-brian-balfour-loops",
+      "source_title": "Brian Balfour on Why Product Growth Loops Beat Funnels, and Retention Foundations",
+      "guest": "Brian Balfour",
+      "url": "https://www.lennyspodcast.com/brian-balfour-on-growth-loops-vs-funnels",
+      "chunk_index": 2,
+      "content": "pays you, you reinvest a portion of that revenue into paid ads to acquire another customer with positive unit economics.\n\nLenny: What is the most critical foundation before optimizing any growth loop?\n\nBrian: Retention. Retention is the single foundational bedrock of all growth. If your product does not retain users\u2014meaning you do not have a flat retention curve\u2014optimizing top-of-funnel acquisition or growth loops is pouring water into a leaky bucket. You cannot grow a product that people don't stick with."
+    },
+    {
+      "id": "ep-elena-verna-plg-chunk-0",
+      "episode_id": "ep-elena-verna-plg",
+      "source_title": "Elena Verna on B2B Product-Led Growth, Activation Metrics, and Freemium vs. Trial",
+      "guest": "Elena Verna",
+      "url": "https://www.lennyspodcast.com/elena-verna-on-b2b-growth-plg-freemium-vs-trial",
+      "chunk_index": 0,
+      "content": "Lenny: Welcome to the podcast. Today I am speaking with Elena Verna, one of the most respected growth advisors in tech, having advised companies like Miro, SurveyMonkey, Amplitude, and Dropbox.\n\nElena: Thank you, Lenny! Thrilled to be here talking all things PLG and activation.\n\nLenny: Let's start with activation. How should growth and product teams define and think about activation metrics?\n\nElena: Activation is the single most critical milestone in the user journey because without activation, retention cannot exist. Too many teams define activation as a vanity onboarding completion step, like 'user created an account and verified email'. That is not activation. Activation is the moment the user experiences the core value proposition of your product\u2014what we call the Aha moment\u2014and builds an initial usage habit.\n\nLenny: How do you measure that specifically in B2B SaaS?"
+    },
+    {
+      "id": "ep-elena-verna-plg-chunk-1",
+      "episode_id": "ep-elena-verna-plg",
+      "source_title": "Elena Verna on B2B Product-Led Growth, Activation Metrics, and Freemium vs. Trial",
+      "guest": "Elena Verna",
+      "url": "https://www.lennyspodcast.com/elena-verna-on-b2b-growth-plg-freemium-vs-trial",
+      "chunk_index": 1,
+      "content": "n is the moment the user experiences the core value proposition of your product\u2014what we call the Aha moment\u2014and builds an initial usage habit.\n\nLenny: How do you measure that specifically in B2B SaaS?\n\nElena: You need to measure both Time to Value (TTV) and the Depth of Value. For example, at Miro, activation wasn't just creating a board. It was creating a board and sharing it with at least two collaborators within the first 7 days. Why? Because collaborative boards had a 4x higher 90-day retention curve than single-player boards. So your activation metric must be a leading indicator of long-term retention. Find the behavior that separates retained cohorts from churned cohorts.\n\nLenny: What is the biggest mistake you see companies make when transitioning from sales-led to product-led growth?"
+    },
+    {
+      "id": "ep-elena-verna-plg-chunk-2",
+      "episode_id": "ep-elena-verna-plg",
+      "source_title": "Elena Verna on B2B Product-Led Growth, Activation Metrics, and Freemium vs. Trial",
+      "guest": "Elena Verna",
+      "url": "https://www.lennyspodcast.com/elena-verna-on-b2b-growth-plg-freemium-vs-trial",
+      "chunk_index": 2,
+      "content": "m retention. Find the behavior that separates retained cohorts from churned cohorts.\n\nLenny: What is the biggest mistake you see companies make when transitioning from sales-led to product-led growth?\n\nElena: The biggest mistake is treating PLG as just a cheaper marketing funnel or a free trial slapped on top of a complex enterprise product. True PLG requires the product to deliver value self-serve before any sales rep intervenes. If your product requires a 30-minute demo to understand, PLG will fail. You must simplify onboarding, eliminate gated friction, and let the end user become your internal champion. Also, choose between Freemium and Free Trial strategically: Freemium works best when there is network effects or frequent usage, whereas Free Trial works when value is immediate but costly to support long-term."
+    }
+  ]
+}
