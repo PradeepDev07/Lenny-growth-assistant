@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Union
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -35,11 +35,15 @@ class Settings(BaseSettings):
     MODEL_FOR_OFFLINE: str = "llama3.2:3b"
 
     # CORS
-    CORS_ORIGINS: List[str] = [
+    CORS_ORIGINS: Union[List[str], str] = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "http://localhost:8000",
+        "https://lennyassistant.pradeepleadsystems.in",
+        "http://lennyassistant.pradeepleadsystems.in",
     ]
+    CORS_ORIGIN_REGEX: Optional[str] = r"https://.*\.pradeepleadsystems\.in|https://.*\.vercel\.app"
+
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
