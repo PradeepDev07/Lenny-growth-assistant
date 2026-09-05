@@ -1,0 +1,10 @@
+{
+    email {$ACME_EMAIL:admin@example.com}
+}
+
+{$DOMAIN_NAME:localhost} {
+    encode gzip zstd
+
+    # Route all requests to Next.js frontend (which proxies /api/* internally to FastAPI)
+    reverse_proxy frontend:3000
+}
