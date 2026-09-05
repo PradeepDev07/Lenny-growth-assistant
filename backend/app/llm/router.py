@@ -57,7 +57,7 @@ class ModelRouter:
 
     def get_chain_for_task(self, task: str) -> List[Tuple[str, str]]:
         """Return the prioritized list of (provider, model) pairs for a task."""
-        chain = list(self.DEFAULT_CHAINS.get(task, [("gemini", "gemini-2.0-flash"), ("ollama", "llama3.1:8b")]))
+        chain = list(self.DEFAULT_CHAINS.get(task, [("gemini", "gemini-2.0-flash"), ("ollama", settings.MODEL_FOR_OFFLINE)]))
         if task in self.task_overrides:
             override = self.task_overrides[task]
             # Place override at the head of the chain if not already there

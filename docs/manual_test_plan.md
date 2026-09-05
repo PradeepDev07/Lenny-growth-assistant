@@ -90,7 +90,7 @@ Use this structured test plan to verify the Lenny Growth Assistant end-to-end.
   - Gemini: Connected
   - OpenRouter: Connected
   - Ollama: Local status
-- [ ] Change `retrieval_qa` model to `Ollama (llama3.1:8b)`.
+- [ ] Change `retrieval_qa` model to `Ollama (llama3.2:3b)`.
 - [ ] Click **`Save Changes`**.
 - [ ] Send another question: verify that the message badge reflects the updated route or shows the fallback badge (`ⓘ Fallback used: Ollama`) if cloud key is disabled.
 

@@ -188,14 +188,14 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
                   value={taskSelections["retrieval_qa"]?.provider || "gemini"}
                   onChange={(e) => {
                     const prov = e.target.value;
-                    const model = prov === "gemini" ? "gemini-2.0-flash" : prov === "openrouter" ? "anthropic/claude-3.5-sonnet" : "llama3.1:8b";
+                    const model = prov === "gemini" ? "gemini-2.0-flash" : prov === "openrouter" ? "anthropic/claude-3.5-sonnet" : "llama3.2:3b";
                     handleTaskChange("retrieval_qa", prov, model);
                   }}
                   className="w-full bg-surface-200 border border-surface-300 rounded p-1.5 text-zinc-200 outline-none focus:border-primary"
                 >
                   <option value="gemini">Gemini · 2.0 Flash (Primary)</option>
                   <option value="openrouter">OpenRouter · Claude 3.5 Sonnet</option>
-                  <option value="ollama">Ollama · llama3.1:8b (Local)</option>
+                  <option value="ollama">Ollama · llama3.2:3b (Local)</option>
                 </select>
               </div>
 
@@ -207,14 +207,14 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
                   value={taskSelections["essay_generation"]?.provider || "openrouter"}
                   onChange={(e) => {
                     const prov = e.target.value;
-                    const model = prov === "openrouter" ? "anthropic/claude-3.7-sonnet" : prov === "gemini" ? "gemini-2.0-flash" : "llama3.1:8b";
+                    const model = prov === "openrouter" ? "anthropic/claude-3.7-sonnet" : prov === "gemini" ? "gemini-2.0-flash" : "llama3.2:3b";
                     handleTaskChange("essay_generation", prov, model);
                   }}
                   className="w-full bg-surface-200 border border-surface-300 rounded p-1.5 text-zinc-200 outline-none focus:border-primary"
                 >
                   <option value="openrouter">OpenRouter · Claude 3.7 Sonnet (Primary)</option>
                   <option value="gemini">Gemini · 2.0 Flash</option>
-                  <option value="ollama">Ollama · llama3.1:8b (Local)</option>
+                  <option value="ollama">Ollama · llama3.2:3b (Local)</option>
                 </select>
               </div>
 
@@ -226,14 +226,14 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
                   value={taskSelections["artifact_generation"]?.provider || "gemini"}
                   onChange={(e) => {
                     const prov = e.target.value;
-                    const model = prov === "gemini" ? "gemini-2.0-flash" : prov === "openrouter" ? "openai/gpt-4o" : "llama3.1:8b";
+                    const model = prov === "gemini" ? "gemini-2.0-flash" : prov === "openrouter" ? "openai/gpt-4o" : "llama3.2:3b";
                     handleTaskChange("artifact_generation", prov, model);
                   }}
                   className="w-full bg-surface-200 border border-surface-300 rounded p-1.5 text-zinc-200 outline-none focus:border-primary"
                 >
                   <option value="gemini">Gemini · 2.0 Flash (Primary)</option>
                   <option value="openrouter">OpenRouter · GPT-4o</option>
-                  <option value="ollama">Ollama · llama3.1:8b (Local)</option>
+                  <option value="ollama">Ollama · llama3.2:3b (Local)</option>
                 </select>
               </div>
             </div>

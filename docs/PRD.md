@@ -14,7 +14,7 @@ Lenny Rachitsky's podcast repository comprises hundreds of hours of interviews w
 1. Answers nuanced growth and product inquiries with strict transcript grounding and inline verifiable citations.
 2. Formats actionable synthesis into viral content frameworks using the **Ship 30 for 30** atomic essay skill.
 3. Generates interactive growth calculators, roadmaps, and cheat sheets within a **sandboxed artifact environment**.
-4. Delivers resilient multi-provider model routing across **Google Gemini (Direct)**, **OpenRouter (Multi-model: Claude 3.7 / GPT-4o)**, and **local Ollama (`llama3.1:8b`)**, enabling seamless offline local execution and cloud cost-performance optimization.
+4. Delivers resilient multi-provider model routing across **Google Gemini (Direct)**, **OpenRouter (Multi-model: Claude 3.7 / GPT-4o)**, and **local Ollama (`llama3.2:3b`)**, enabling seamless offline local execution and cloud cost-performance optimization.
 
 ---
 
@@ -28,7 +28,7 @@ Lenny Rachitsky's podcast repository comprises hundreds of hours of interviews w
 ### Core Jobs-to-be-Done
 - *When I am* planning an activation experiment, *I want to* query Elena Verna's exact advice on time-to-value, *so that I can* cite authoritative precedents in our product spec.
 - *When I have* extracted a high-value insight on growth loops, *I want to* convert it into a structured Ship 30/30 atomic essay with one click, *so that I can* share actionable takeaways with my team and audience.
-- *When I am* demonstrating the assistant in an offline or air-gapped environment, *I want the system to* seamlessly fall back to local Ollama (`llama3.1:8b`), *so that I can* run the application without cloud API dependencies.
+- *When I am* demonstrating the assistant in an offline or air-gapped environment, *I want the system to* seamlessly fall back to local Ollama (`llama3.2:3b`), *so that I can* run the application without cloud API dependencies.
 
 ---
 
@@ -39,7 +39,7 @@ Lenny Rachitsky's podcast repository comprises hundreds of hours of interviews w
 | **Citation Precision** | **≥ 85%** | Percentage of test answers containing verified episode, guest, and timestamp/chunk attribution. |
 | **Grounded Faithfulness** | **≥ 95%** | Retrieval verification: answers only cite verified transcript content; declines to answer when knowledge is absent. |
 | **Response Latency (Cloud)** | **p50 < 2.5s** | End-to-end time to first token using Gemini 2.0 Flash via SSE stream. |
-| **Response Latency (Local)** | **p50 < 6.0s** | End-to-end time to first token on local Ollama (`llama3.1:8b`). |
+| **Response Latency (Local)** | **p50 < 4.0s** | End-to-end time to first token on local Ollama (`llama3.2:3b`). |
 | **Sandbox Security Violations** | **0%** | Sandboxed iframe tests: zero cookie access, zero top-level window redirects, zero parent DOM leakage. |
 
 ---

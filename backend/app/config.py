@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     MODEL_FOR_RETRIEVAL_QA: str = "gemini-2.0-flash"
     MODEL_FOR_ESSAY: str = "anthropic/claude-3.7-sonnet"
     MODEL_FOR_ARTIFACT: str = "gemini-2.0-flash"
-    MODEL_FOR_OFFLINE: str = "llama3.1:8b"
+    MODEL_FOR_OFFLINE: str = "llama3.2:3b"
 
     # CORS
     CORS_ORIGINS: List[str] = [

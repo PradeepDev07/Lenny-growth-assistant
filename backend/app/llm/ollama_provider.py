@@ -10,8 +10,8 @@ from backend.app.llm.base import BaseLLMProvider, LLMResponse
 class OllamaProvider(BaseLLMProvider):
     """Local Ollama Provider for offline and local-first execution."""
 
-    def __init__(self, model: str = "llama3.1:8b", base_url: Optional[str] = None):
-        super().__init__(model=model)
+    def __init__(self, model: Optional[str] = None, base_url: Optional[str] = None):
+        super().__init__(model=model or settings.MODEL_FOR_OFFLINE)
         self.base_url = (base_url or settings.OLLAMA_BASE_URL).rstrip("/")
 
     async def is_available(self) -> bool:

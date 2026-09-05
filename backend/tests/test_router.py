@@ -28,9 +28,9 @@ def test_router_default_chains(router):
 
 
 def test_router_override(router):
-    router.set_task_override("retrieval_qa", "ollama", "llama3.1:8b")
+    router.set_task_override("retrieval_qa", "ollama", "llama3.2:3b")
     chain = router.get_chain_for_task("retrieval_qa")
-    assert chain[0] == ("ollama", "llama3.1:8b")
+    assert chain[0] == ("ollama", "llama3.2:3b")
     routes = router.get_current_routes()
     assert routes["retrieval_qa"]["provider"] == "ollama"
     assert routes["retrieval_qa"]["is_overridden"] is True
@@ -92,7 +92,7 @@ def test_config_api_endpoints(client):
     # POST /config - valid override
     override_resp = client.post(
         "/config",
-        json={"task": "retrieval_qa", "provider": "ollama", "model": "llama3.1:8b"},
+        json={"task": "retrieval_qa", "provider": "ollama", "model": "llama3.2:3b"},
     )
     assert override_resp.status_code == 200
     override_data = override_resp.json()
@@ -102,6 +102,6 @@ def test_config_api_endpoints(client):
     # POST /config - invalid task
     bad_task_resp = client.post(
         "/config",
-        json={"task": "invalid_task", "provider": "ollama", "model": "llama3.1:8b"},
+        json={"task": "invalid_task", "provider": "ollama", "model": "llama3.2:3b"},
     )
     assert bad_task_resp.status_code == 400

@@ -144,12 +144,12 @@ export const HelpDrawer: React.FC<HelpDrawerProps> = ({
                     </div>
                     {hasDefaultModel ? (
                       <p className="text-zinc-400 text-[11px]">
-                        Default model <span className="font-mono text-zinc-200">llama3.1:8b</span> is installed and ready for offline use.
+                        Default model <span className="font-mono text-zinc-200">{ollamaStatus?.default_model || "llama3.2:3b"}</span> is installed and ready for offline use.
                       </p>
                     ) : (
                       <p className="text-amber-400 text-[11px] flex items-center gap-1">
                         <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
-                        Ollama is online, but <span className="font-mono text-white">llama3.1:8b</span> is not pulled yet. See Step 3 below.
+                        Ollama is online, but <span className="font-mono text-white">{ollamaStatus?.default_model || "llama3.2:3b"}</span> is not pulled yet. See Step 3 below.
                       </p>
                     )}
                     {installedModels.length > 0 && (
@@ -217,14 +217,14 @@ export const HelpDrawer: React.FC<HelpDrawerProps> = ({
 
               {/* Step 3: Pull Model */}
               <div className="space-y-1.5">
-                <span className="font-semibold text-zinc-100">Step 3: Pull Recommended Model</span>
+                <span className="font-semibold text-zinc-100">Step 3: Pull Recommended Model (Llama 3.2 3B)</span>
                 <p className="text-zinc-400 text-[11px]">
-                  Pull <span className="font-mono text-zinc-200">llama3.1:8b</span> (or smaller <span className="font-mono text-zinc-200">llama3.2:3b</span> for machines with 8GB RAM):
+                  Pull the fast and lightweight <span className="font-mono text-zinc-200">llama3.2:3b</span> model:
                 </p>
                 <div className="flex items-center justify-between p-2 rounded-lg bg-surface-100 border border-surface-200 font-mono text-[11px]">
-                  <code>ollama pull llama3.1:8b</code>
+                  <code>ollama pull llama3.2:3b</code>
                   <button
-                    onClick={() => copyToClipboard("ollama pull llama3.1:8b", "pull")}
+                    onClick={() => copyToClipboard("ollama pull llama3.2:3b", "pull")}
                     className="p-1 hover:text-white text-zinc-400 transition-colors"
                   >
                     {copiedCmd === "pull" ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}

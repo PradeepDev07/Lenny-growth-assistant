@@ -38,7 +38,7 @@ This document synthesizes `Lenny growth assistant guide.MD` and `Lenny growth as
     ├──► Model Router
     │       ├── Tier 1: Google Gemini (2.0 Flash / Pro) - Direct SDK/REST
     │       ├── Tier 2: OpenRouter (Claude 3.7 Sonnet, GPT-4o, Llama 3.3)
-    │       └── Tier 3: Ollama (llama3.1:8b) - Local Offline Fallback
+    │       └── Tier 3: Ollama (llama3.2:3b) - Local Offline Fallback
     │
     ├──► Retrieval & Vector Engine
     │       ├── pgvector (PostgreSQL vector extension)
@@ -57,11 +57,11 @@ This document synthesizes `Lenny growth assistant guide.MD` and `Lenny growth as
 
 | Task Type | Primary Provider & Model | Secondary Fallback | Final Local Fallback | Rationale |
 |---|---|---|---|---|
-| `retrieval_qa` | **Gemini 2.0 Flash** | OpenRouter (`anthropic/claude-3.5-sonnet`) | Ollama (`llama3.1:8b`) | Massive context window for multiple transcript chunks, ultra-low latency, grounded generation. |
-| `essay_generation` | **OpenRouter** (`anthropic/claude-3.7-sonnet` or `openai/gpt-4o`) | Gemini Pro | Ollama (`llama3.1:8b`) | Deep synthesis, long-form narrative cadence matching Ship 30/30 rubric. |
-| `artifact_generation` | **Gemini 2.0 Flash** / OpenRouter | OpenRouter (`gpt-4o`) | Ollama (`llama3.1:8b`) | High syntax fidelity for HTML/CSS/JS and Markdown code generation. |
-| `intent_routing` | **Gemini 2.0 Flash** | Ollama (`llama3.1:8b`) | Rule-based regex heuristic | Fast, deterministic classification of prompt intentions. |
-| `offline_demo_mode` | **Ollama** (`llama3.1:8b`) | Rule-based responses | None | Completely air-gapped demo capability without cloud keys. |
+| `retrieval_qa` | **Gemini 2.0 Flash** | OpenRouter (`anthropic/claude-3.5-sonnet`) | Ollama (`llama3.2:3b`) | Massive context window for multiple transcript chunks, ultra-low latency, grounded generation. |
+| `essay_generation` | **OpenRouter** (`anthropic/claude-3.7-sonnet` or `openai/gpt-4o`) | Gemini Pro | Ollama (`llama3.2:3b`) | Deep synthesis, long-form narrative cadence matching Ship 30/30 rubric. |
+| `artifact_generation` | **Gemini 2.0 Flash** / OpenRouter | OpenRouter (`gpt-4o`) | Ollama (`llama3.2:3b`) | High syntax fidelity for HTML/CSS/JS and Markdown code generation. |
+| `intent_routing` | **Gemini 2.0 Flash** | Ollama (`llama3.2:3b`) | Rule-based regex heuristic | Fast, deterministic classification of prompt intentions. |
+| `offline_demo_mode` | **Ollama** (`llama3.2:3b`) | Rule-based responses | None | Completely air-gapped demo capability without cloud keys. |
 
 ---
 

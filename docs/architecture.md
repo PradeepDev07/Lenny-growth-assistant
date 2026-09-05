@@ -34,7 +34,7 @@ This document outlines the technical architecture, data flows, database schemas,
  ┌───────────────────────────┐  ┌──────────────────────────────┐  ┌──────────────────┐
  │ Gemini 2.0 Flash (Direct) │  │ BM25 / Cosine Hybrid Index   │  │ PostgreSQL 16    │
  │ OpenRouter (Claude/GPT-4o)│  │ Top-k Chunk Search           │  │ (or SQLite local)│
- │ Ollama (llama3.1:8b local)│  │ Overlapping Metadata Chunks  │  │ Sessions, Messages│
+ │ Ollama (llama3.2:3b local)│  │ Overlapping Metadata Chunks  │  │ Sessions, Messages│
  └───────────────────────────┘  └──────────────────────────────┘  │ Artifacts        │
                                                                   └──────────────────┘
 ```
@@ -94,7 +94,7 @@ Request: Task = "retrieval_qa"
    │     └─► [Error / No Key]
    │           │
    │           ▼
-   └─► 3. Final Fallback: Local Ollama (llama3.1:8b)
+   └─► 3. Final Fallback: Local Ollama (llama3.2:3b)
          └─► [Success] ──► Return response (fallback_used: true)
          └─► [Unavailable] ──► Friendly error returned to UI
 ```
@@ -105,7 +105,7 @@ Request: Task = "retrieval_qa"
   {
     "task": "retrieval_qa",
     "provider": "ollama",
-    "model": "llama3.1:8b"
+    "model": "llama3.2:3b"
   }
   ```
 

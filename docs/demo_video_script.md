@@ -12,7 +12,7 @@ This script provides a concise, high-impact demonstration flow aligned with the 
 | **0:30 – 1:15** | **Grounded RAG Chat & Citations** | Ask: *"How should we measure activation metrics in B2B PLG according to Elena Verna?"* Show live SSE token stream. Highlight the **`[Gemini 2.0 Flash]`** badge. Expand **"Sources Cited"** showing exact episode and quote. |
 | **1:15 – 1:45** | **Ship 30 for 30 Content Skill** | Click **`[Turn into Ship 30/30 post]`**. Point out the 5-rule rubric: provocative 1-sentence hook, 1-3-1 cadence, actionable 3-step playbook, and attributed credit to Elena Verna. |
 | **1:45 – 2:15** | **Sandboxed Artifact Viewer** | Click **`[Generate Interactive Artifact]`** or ask for a CAC/LTV calculator. Demonstrate the two-pane Claude-style split. Show tabs: **[Preview]**, **[Code]**, **[Raw]**. Explain the security trade-off: why HTML is sandboxed in an `<iframe>` without `allow-same-origin` rather than banned outright. |
-| **2:15 – 2:45** | **Dynamic Model Router & Local Ollama** | Open **`⚙ Model Settings`**. Show live provider status (Gemini, OpenRouter, Ollama). Switch `retrieval_qa` to **`Ollama (llama3.1:8b)`**. Submit query and show the inline badge: **`[Ollama llama3.1] (Local)`** proving air-gapped demo capability. |
+| **2:15 – 2:45** | **Dynamic Model Router & Local Ollama** | Open **`⚙ Model Settings`**. Show live provider status (Gemini, OpenRouter, Ollama). Switch `retrieval_qa` to **`Ollama (llama3.2:3b)`**. Submit query and show the inline badge: **`[Ollama Llama 3.2] (Local)`** proving air-gapped demo capability. |
 | **2:45 – 3:00** | **Wrap Up & Architecture Summary** | Highlight clean test suite (27 passing tests), Docker Compose one-command launch, and git commit history reflecting every step of the process. |
 
 ---
@@ -42,7 +42,7 @@ This script provides a concise, high-impact demonstration flow aligned with the 
 ### 5. Dynamic Model Router & Local Ollama (2:15 - 2:45)
 > *"Finally, let’s look at resilience. In Model Settings, our router exposes the live connectivity of Gemini, OpenRouter, and Ollama.
 >
-> Rather than a static toggle, our router uses task-based fallback chains. If I switch the QA task to Ollama, or if cloud API keys are disabled, the system seamlessly falls back to our local `llama3.1:8b` model running offline. The UI transparently updates the provider badge to inform the user that a fallback occurred."*
+> Rather than a static toggle, our router uses task-based fallback chains. If I switch the QA task to Ollama, or if cloud API keys are disabled, the system seamlessly falls back to our local `llama3.2:3b` model running offline. The UI transparently updates the provider badge to inform the user that a fallback occurred."*
 
 ### 6. Closing (2:45 - 3:00)
 > *"The repository includes a complete automated test suite with 27 passing tests, full Docker Compose deployment with PostgreSQL and pgvector, and an honest git commit history representing every phase. Thank you!"*

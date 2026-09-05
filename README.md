@@ -12,7 +12,7 @@ An AI-powered growth assistant grounded in Lenny Rachitsky's podcast interviews.
     │ HTTPS / SSE
     ▼
  FastAPI Backend (Port 8000)
-    ├── Task-based Model Router (Gemini 2.0 Flash, OpenRouter Claude/GPT-4o, Ollama llama3.1)
+    ├── Task-based Model Router (Gemini 2.0 Flash, OpenRouter Claude/GPT-4o, Ollama Llama 3.2 3B)
     ├── BM25 / Vector Store (Curated Lenny Podcast Transcripts)
     ├── RAG Agent with In-line Citations & Strict Anti-Hallucination
     ├── Ship 30 for 30 Content Creation Skill
@@ -106,9 +106,9 @@ PYTHONPATH=. pytest backend/tests/ -v
 
 | Task | Primary Provider | Fallback Chain |
 |---|---|---|
-| `retrieval_qa` | Gemini 2.0 Flash | OpenRouter (Claude 3.5 Sonnet) -> Ollama (llama3.1:8b) |
-| `essay_generation` | OpenRouter (Claude 3.7 Sonnet) | Gemini 2.0 Flash -> Ollama (llama3.1:8b) |
-| `artifact_generation` | Gemini 2.0 Flash | OpenRouter (GPT-4o) -> Ollama (llama3.1:8b) |
-| `offline_demo_mode` | Ollama (llama3.1:8b) | Local rule-based responses |
+| `retrieval_qa` | Gemini 2.0 Flash | OpenRouter (Claude 3.5 Sonnet) -> Ollama (llama3.2:3b) |
+| `essay_generation` | OpenRouter (Claude 3.7 Sonnet) | Gemini 2.0 Flash -> Ollama (llama3.2:3b) |
+| `artifact_generation` | Gemini 2.0 Flash | OpenRouter (GPT-4o) -> Ollama (llama3.2:3b) |
+| `offline_demo_mode` | Ollama (llama3.2:3b) | Local rule-based responses |
 
 To change models dynamically at runtime, open the **Model Settings** drawer in the UI or send a `POST /config` request.
