@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { SessionSummary, Message, Artifact } from "@/lib/types";
+import { ConfigResponse, SessionSummary, Message, Artifact } from "@/lib/types";
 import {
   fetchSessions,
   createSession,
@@ -9,14 +9,17 @@ import {
   deleteSession,
   triggerShip30,
   createArtifact,
+  fetchConfig,
 } from "@/lib/api";
+
 import { useChatStream } from "@/hooks/useChatStream";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { MessageList } from "@/components/chat/MessageList";
 import { MessageInput } from "@/components/chat/MessageInput";
 import { ArtifactViewer } from "@/components/artifact/ArtifactViewer";
 import { SettingsDrawer } from "@/components/settings/SettingsDrawer";
-import { Sparkles, Menu, Cpu } from "lucide-react";
+import { HelpDrawer } from "@/components/help/HelpDrawer";
+import { Sparkles, Menu, Cpu, HelpCircle } from "lucide-react";
 
 export default function Home() {
   const [sessions, setSessions] = useState<SessionSummary[]>([]);
@@ -26,14 +29,27 @@ export default function Home() {
   const [activeArtifactId, setActiveArtifactId] = useState<string>("");
   const [isArtifactViewerOpen, setIsArtifactViewerOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [config, setConfig] = useState<ConfigResponse | null>(null);
 
-  // Initialize and load sessions
+  // Initialize and load sessions & router status
   useEffect(() => {
     initSessions();
+    loadConfig();
   }, []);
 
+  const loadConfig = async () => {
+    try {
+      const data = await fetchConfig();
+      setConfig(data);
+    } catch (e) {
+      console.error("Failed to load config:", e);
+    }
+  };
+
   const initSessions = async () => {
+
     try {
       const list = await fetchSessions();
       setSessions(list);
@@ -207,6 +223,7 @@ export default function Home() {
           onNewChat={handleNewChat}
           onDeleteSession={handleDeleteSession}
           onOpenSettings={() => setIsSettingsOpen(true)}
+          onOpenHelp={() => setIsHelpOpen(true)}
         />
       </div>
 
@@ -226,17 +243,47 @@ export default function Home() {
               </h2>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
+              {/* Live Ollama Detection Pill */}
+              {config?.providers?.ollama?.is_running ? (
+                <div
+                  onClick={() => setIsHelpOpen(true)}
+                  className="cursor-pointer flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/40 text-emerald-400 border border-emerald-800/40 text-xs font-medium hover:bg-emerald-950/60 transition-colors"
+                  title="Ollama is running locally (Click for details)"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Ollama: Live</span>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setIsHelpOpen(true)}
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-100 text-zinc-400 hover:text-amber-300 hover:border-amber-800/50 border border-surface-200 text-xs font-medium transition-colors"
+                  title="Local Ollama is offline. Click for setup instructions."
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-500" />
+                  <span>Ollama: Offline (Setup)</span>
+                </button>
+              )}
+
               {/* Provider Status Pill */}
               <div
                 onClick={() => setIsSettingsOpen(true)}
                 className="cursor-pointer flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-100 hover:bg-surface-200 border border-surface-200 text-xs font-medium text-zinc-300 transition-colors"
                 title="Click to configure model routing"
               >
-                <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50" />
-                <span>Gemini 2.0 Flash</span>
+                <span className="w-2 h-2 rounded-full bg-indigo-400 shadow-sm shadow-indigo-400/50" />
+                <span>Router Config</span>
                 <span className="text-zinc-500">▾</span>
               </div>
+
+              {/* Quick Help Button */}
+              <button
+                onClick={() => setIsHelpOpen(true)}
+                className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-surface-100 transition-colors"
+                title="Setup & Help Guide"
+              >
+                <HelpCircle className="w-4 h-4 text-primary" />
+              </button>
 
               {artifacts.length > 0 && !isArtifactViewerOpen && (
                 <button
@@ -281,7 +328,18 @@ export default function Home() {
       <SettingsDrawer
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
+        onOpenHelp={() => setIsHelpOpen(true)}
+        onRoutesUpdated={loadConfig}
+      />
+
+      {/* Help & Setup Guide Drawer */}
+      <HelpDrawer
+        isOpen={isHelpOpen}
+        onClose={() => setIsHelpOpen(false)}
+        ollamaStatus={config?.providers?.ollama}
+        onRefreshStatus={loadConfig}
       />
     </div>
   );
 }
+

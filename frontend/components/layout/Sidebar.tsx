@@ -9,6 +9,7 @@ interface SidebarProps {
   onNewChat: () => void;
   onDeleteSession: (id: string) => void;
   onOpenSettings: () => void;
+  onOpenHelp: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -18,8 +19,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onNewChat,
   onDeleteSession,
   onOpenSettings,
+  onOpenHelp,
 }) => {
   // Helper to group sessions by recency
+
   const groupSessions = (list: SessionSummary[]) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -130,8 +133,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
 
-      {/* Footer Settings Button */}
-      <div className="p-3 border-t border-surface-200">
+      {/* Footer Settings & Help Buttons */}
+      <div className="p-3 border-t border-surface-200 space-y-1">
+        <button
+          onClick={onOpenHelp}
+          className="w-full flex items-center gap-2.5 py-2 px-3 rounded-lg text-xs text-primary hover:text-primary-hover hover:bg-primary/10 transition-colors font-medium"
+        >
+          <Sparkles className="w-4 h-4" /> Setup & Help Guide
+        </button>
         <button
           onClick={onOpenSettings}
           className="w-full flex items-center gap-2.5 py-2 px-3 rounded-lg text-xs text-zinc-400 hover:text-zinc-100 hover:bg-surface-100 transition-colors font-medium"
@@ -142,3 +151,4 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </aside>
   );
 };
+

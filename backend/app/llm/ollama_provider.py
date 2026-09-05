@@ -23,6 +23,19 @@ class OllamaProvider(BaseLLMProvider):
         except Exception:
             return False
 
+    async def get_installed_models(self) -> List[str]:
+        """Fetch list of locally downloaded models from Ollama."""
+        try:
+            async with httpx.AsyncClient(timeout=2.0) as client:
+                resp = await client.get(f"{self.base_url}/api/tags")
+                if resp.status_code == 200:
+                    data = resp.json()
+                    return [m.get("name", "") for m in data.get("models", [])]
+        except Exception:
+            pass
+        return []
+
+
     def _prepare_messages(self, messages: List[Dict[str, str]], system: Optional[str] = None) -> List[Dict[str, str]]:
         formatted = []
         if system:

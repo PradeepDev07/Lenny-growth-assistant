@@ -75,6 +75,11 @@ class ModelRouter:
         openrouter = OpenRouterProvider()
         ollama = OllamaProvider()
 
+        ollama_running = await ollama.is_available()
+        installed_models = await ollama.get_installed_models() if ollama_running else []
+        default_model = settings.MODEL_FOR_OFFLINE
+        has_default_model = any(default_model in m for m in installed_models)
+
         return {
             "gemini": {
                 "configured": await gemini.is_available(),
@@ -85,11 +90,15 @@ class ModelRouter:
                 "default_model": settings.MODEL_FOR_ESSAY,
             },
             "ollama": {
-                "configured": await ollama.is_available(),
-                "default_model": settings.MODEL_FOR_OFFLINE,
+                "configured": ollama_running and (len(installed_models) > 0),
+                "is_running": ollama_running,
+                "installed_models": installed_models,
+                "has_default_model": has_default_model,
+                "default_model": default_model,
                 "endpoint": settings.OLLAMA_BASE_URL,
             },
         }
+
 
     def get_current_routes(self) -> Dict[str, Dict[str, Any]]:
         """Return current effective primary model for each task."""

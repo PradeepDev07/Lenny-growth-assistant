@@ -7,13 +7,16 @@ interface SettingsDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   onRoutesUpdated?: () => void;
+  onOpenHelp?: () => void;
 }
 
 export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
   isOpen,
   onClose,
   onRoutesUpdated,
+  onOpenHelp,
 }) => {
+
   const [config, setConfig] = useState<ConfigResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -105,32 +108,69 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
 
             {config && (
               <div className="space-y-2">
-                {Object.entries(config.providers).map(([providerName, status]) => (
-                  <div
-                    key={providerName}
-                    className="flex items-center justify-between p-2.5 rounded-lg bg-surface-100 border border-surface-200 text-xs"
-                  >
-                    <div className="flex items-center gap-2 font-medium capitalize text-zinc-200">
-                      <span
-                        className={`w-2 h-2 rounded-full ${
-                          status.configured ? "bg-emerald-500 shadow-sm shadow-emerald-500/50" : "bg-zinc-600"
-                        }`}
-                      />
-                      {providerName}
-                    </div>
-                    <span
-                      className={`font-mono text-[11px] px-2 py-0.5 rounded ${
-                        status.configured
-                          ? "bg-emerald-950/40 text-emerald-400 border border-emerald-800/40"
-                          : "bg-zinc-800 text-zinc-400"
-                      }`}
+                {Object.entries(config.providers).map(([providerName, status]) => {
+                  const isOllama = providerName === "ollama";
+                  const isOnline = isOllama ? (status.is_running ?? status.configured) : status.configured;
+
+                  return (
+                    <div
+                      key={providerName}
+                      className="p-2.5 rounded-lg bg-surface-100 border border-surface-200 text-xs space-y-1"
                     >
-                      {status.configured ? "Connected" : "Not Configured"}
-                    </span>
-                  </div>
-                ))}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 font-medium capitalize text-zinc-200">
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              isOnline ? "bg-emerald-500 shadow-sm shadow-emerald-500/50" : "bg-rose-500/80"
+                            }`}
+                          />
+                          {providerName}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`font-mono text-[11px] px-2 py-0.5 rounded ${
+                              isOnline
+                                ? "bg-emerald-950/40 text-emerald-400 border border-emerald-800/40"
+                                : "bg-zinc-800 text-zinc-400"
+                            }`}
+                          >
+                            {isOllama
+                              ? isOnline
+                                ? "Running (Local)"
+                                : "Offline"
+                              : isOnline
+                              ? "Connected"
+                              : "Not Configured"}
+                          </span>
+                        </div>
+                      </div>
+
+                      {isOllama && !isOnline && onOpenHelp && (
+                        <div className="flex items-center justify-between pt-1 text-[11px] text-zinc-400 border-t border-surface-200/50">
+                          <span>Local daemon not detected.</span>
+                          <button
+                            onClick={() => {
+                              onClose();
+                              onOpenHelp();
+                            }}
+                            className="text-primary hover:text-primary-hover font-medium underline"
+                          >
+                            Ollama Setup Instructions →
+                          </button>
+                        </div>
+                      )}
+
+                      {isOllama && isOnline && status.installed_models && (
+                        <div className="text-[10px] text-zinc-400 pt-0.5 truncate font-mono">
+                          Models: {status.installed_models.join(", ") || "none pulled yet"}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
+
           </div>
 
           {/* Task Model Routing Assignments */}
