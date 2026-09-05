@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 
 from sqlalchemy import text
 from backend.app.config import settings
+from backend.app.core.logging import setup_structured_logging, ObservabilityMiddleware
 from backend.app.db.session import init_db, SessionLocal
 from backend.app.api.sessions import router as sessions_router
 from backend.app.api.config import router as config_router
@@ -16,6 +17,8 @@ from backend.app.api.artifacts import router as artifacts_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # Configure structured JSON logging
+    setup_structured_logging()
     # Initialize tables
     init_db()
     yield
@@ -30,6 +33,9 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
+# Observability middleware
+app.add_middleware(ObservabilityMiddleware)
+
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
@@ -38,6 +44,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # Include API Routers
 app.include_router(sessions_router)
