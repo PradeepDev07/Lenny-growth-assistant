@@ -10,6 +10,7 @@ from backend.app.db.session import init_db, SessionLocal
 from backend.app.api.sessions import router as sessions_router
 from backend.app.api.config import router as config_router
 from backend.app.api.chat import router as chat_router
+from backend.app.api.skills import router as skills_router
 
 
 @asynccontextmanager
@@ -41,6 +42,8 @@ app.add_middleware(
 app.include_router(sessions_router)
 app.include_router(config_router)
 app.include_router(chat_router)
+app.include_router(skills_router)
+
 
 
 
