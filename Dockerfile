@@ -8,15 +8,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt ./
+COPY backend/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . /app/backend/
-RUN cp /app/backend/vector_cache.json /app/vector_cache.json 2>/dev/null || true
+COPY backend/ /app/backend/
+COPY vector_cache.json /app/vector_cache.json
 
 ENV PYTHONPATH=/app
 ENV PORT=8000
-
 EXPOSE 8000
 
 CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000"]

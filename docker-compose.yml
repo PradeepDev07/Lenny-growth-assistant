@@ -19,8 +19,8 @@ services:
 
   backend:
     build:
-      context: .
-      dockerfile: backend/Dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: lenny_growth_backend
     restart: unless-stopped
     ports:

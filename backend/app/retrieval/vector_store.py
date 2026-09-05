@@ -5,7 +5,28 @@ import math
 from typing import Any, Dict, List, Optional
 from collections import Counter
 
-CHUNKS_CACHE_FILE = os.path.join(os.path.dirname(__file__), "..", "..", "..", "vector_cache.json")
+def _find_cache_file() -> str:
+    """Resolve vector_cache.json path across local, monorepo, and container environments."""
+    if "VECTOR_CACHE_FILE" in os.environ and os.path.exists(os.environ["VECTOR_CACHE_FILE"]):
+        return os.environ["VECTOR_CACHE_FILE"]
+
+    candidates = [
+        # Monorepo root from backend/app/retrieval/
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "vector_cache.json")),
+        # Backend folder
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "vector_cache.json")),
+        # Docker container standard paths
+        "/app/vector_cache.json",
+        "/app/backend/vector_cache.json",
+        "vector_cache.json",
+    ]
+    for p in candidates:
+        if os.path.exists(p):
+            return p
+    return candidates[0]
+
+
+CHUNKS_CACHE_FILE = _find_cache_file()
 
 
 def tokenize(text: str) -> List[str]:
