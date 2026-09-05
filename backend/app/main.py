@@ -9,6 +9,7 @@ from backend.app.config import settings
 from backend.app.db.session import init_db, SessionLocal
 from backend.app.api.sessions import router as sessions_router
 from backend.app.api.config import router as config_router
+from backend.app.api.chat import router as chat_router
 
 
 @asynccontextmanager
@@ -39,6 +40,8 @@ app.add_middleware(
 # Include API Routers
 app.include_router(sessions_router)
 app.include_router(config_router)
+app.include_router(chat_router)
+
 
 
 
