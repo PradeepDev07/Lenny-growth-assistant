@@ -1,5 +1,10 @@
+from pathlib import Path
 from typing import List, Optional
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Resolve absolute path to root .env
+_ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+_ROOT_ENV = _ROOT_DIR / ".env"
 
 
 class Settings(BaseSettings):
@@ -36,7 +41,7 @@ class Settings(BaseSettings):
     ]
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=(_ROOT_ENV, ".env", "../.env"),
         env_file_encoding="utf-8",
         extra="ignore"
     )

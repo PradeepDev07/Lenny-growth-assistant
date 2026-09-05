@@ -144,12 +144,20 @@ export const HelpDrawer: React.FC<HelpDrawerProps> = ({
                     </div>
                     {hasDefaultModel ? (
                       <p className="text-zinc-400 text-[11px]">
-                        Default model <span className="font-mono text-zinc-200">{ollamaStatus?.default_model || "llama3.2:3b"}</span> is installed and ready for offline use.
+                        {ollamaStatus?.has_exact_default ? (
+                          <>
+                            Default model <span className="font-mono text-zinc-200">{ollamaStatus?.default_model || "llama3.2:3b"}</span> is installed and ready for offline use.
+                          </>
+                        ) : (
+                          <>
+                            Active model <span className="font-mono text-emerald-400">{ollamaStatus?.active_model || installedModels[0]}</span> is installed and ready (dynamic fallback active).
+                          </>
+                        )}
                       </p>
                     ) : (
                       <p className="text-amber-400 text-[11px] flex items-center gap-1">
                         <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
-                        Ollama is online, but <span className="font-mono text-white">{ollamaStatus?.default_model || "llama3.2:3b"}</span> is not pulled yet. See Step 3 below.
+                        Ollama is online, but no models are installed yet. See Step 3 below.
                       </p>
                     )}
                     {installedModels.length > 0 && (

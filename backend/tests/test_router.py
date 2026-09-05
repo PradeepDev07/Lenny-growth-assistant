@@ -3,7 +3,7 @@ from unittest.mock import patch, AsyncMock
 from fastapi.testclient import TestClient
 from backend.app.main import app
 from backend.app.llm.base import LLMResponse
-from backend.app.llm.router import ModelRouter
+from backend.app.llm.router import ModelRouter, select_best_ollama_model
 
 
 @pytest.fixture
@@ -105,3 +105,88 @@ def test_config_api_endpoints(client):
         json={"task": "invalid_task", "provider": "ollama", "model": "llama3.2:3b"},
     )
     assert bad_task_resp.status_code == 400
+
+
+def test_select_best_ollama_model():
+    # Empty
+    assert select_best_ollama_model([]) is None
+
+    # Exact match
+    models = ["llama2-uncensored:latest", "qwen3.5:cloud", "llama3.2:3b"]
+    assert select_best_ollama_model(models, "llama3.2:3b") == "llama3.2:3b"
+
+    # Requested missing: prefer offline/local over -cloud
+    models_no_default = ["qwen3.5:cloud", "llama2-uncensored:latest", "deepseek-v3.1:cloud"]
+    assert select_best_ollama_model(models_no_default, "llama3.2:3b") == "llama2-uncensored:latest"
+
+    # All cloud models: fallback to first
+    cloud_only = ["qwen3.5:cloud", "deepseek-v3.1:cloud"]
+    assert select_best_ollama_model(cloud_only, "llama3.2:3b") == "qwen3.5:cloud"
+
+
+@pytest.mark.asyncio
+async def test_resolve_ollama_model_dynamic_substitution():
+    custom_router = ModelRouter()
+
+    with patch("backend.app.llm.router.OllamaProvider") as mock_provider_cls:
+        mock_instance = AsyncMock()
+        mock_instance.is_available.return_value = True
+        mock_instance.get_installed_models.return_value = ["llama2-uncensored:latest", "qwen3.5:cloud"]
+        mock_provider_cls.return_value = mock_instance
+
+        # Test exact match
+        resolved, was_sub = await custom_router.resolve_ollama_model("llama2-uncensored:latest")
+        assert resolved == "llama2-uncensored:latest"
+        assert was_sub is False
+
+        # Test fallback substitution
+        resolved, was_sub = await custom_router.resolve_ollama_model("llama3.2:3b")
+        assert resolved == "llama2-uncensored:latest"
+        assert was_sub is True
+
+
+@pytest.mark.asyncio
+async def test_resolve_ollama_model_unavailable():
+    custom_router = ModelRouter()
+
+    with patch("backend.app.llm.router.OllamaProvider") as mock_provider_cls:
+        mock_instance = AsyncMock()
+        mock_instance.is_available.return_value = False
+        mock_provider_cls.return_value = mock_instance
+
+        resolved, was_sub = await custom_router.resolve_ollama_model("llama3.2:3b")
+        assert resolved is None
+        assert was_sub is False
+
+
+@pytest.mark.asyncio
+async def test_ollama_dynamic_fallback_in_generate():
+    custom_router = ModelRouter()
+
+    mock_ollama_response = LLMResponse(
+        text="Offline answer from substituted model",
+        provider="ollama",
+        model="llama2-uncensored:latest",
+        latency_ms=85.0,
+    )
+
+    with patch.object(custom_router, "resolve_ollama_model") as mock_resolve:
+        mock_resolve.return_value = ("llama2-uncensored:latest", True)
+
+        with patch.object(custom_router, "get_provider_instance") as mock_get_provider:
+            mock_ollama = AsyncMock()
+            mock_ollama.is_available.return_value = True
+            mock_ollama.generate.return_value = mock_ollama_response
+            mock_get_provider.return_value = mock_ollama
+
+            resp, meta = await custom_router.generate_for_task(
+                task="offline_demo_mode",
+                messages=[{"role": "user", "content": "hi"}],
+            )
+
+            assert resp.text == "Offline answer from substituted model"
+            assert meta["provider"] == "ollama"
+            assert meta["model"] == "llama2-uncensored:latest"
+            assert meta["fallback_used"] is True
+            assert meta["fallback_from"] == "llama3.2:3b"
+
