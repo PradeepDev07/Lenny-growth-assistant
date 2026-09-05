@@ -18,13 +18,13 @@ def client():
 
 def test_router_default_chains(router):
     qa_chain = router.get_chain_for_task("retrieval_qa")
-    assert qa_chain[0][0] == "gemini"
+    assert qa_chain[0] == ("gemini", "gemini-2.5-flash")
 
     essay_chain = router.get_chain_for_task("essay_generation")
-    assert essay_chain[0][0] == "openrouter"
+    assert essay_chain[0] == ("openrouter", "openrouter/free")
 
     offline_chain = router.get_chain_for_task("offline_demo_mode")
-    assert offline_chain[0][0] == "ollama"
+    assert offline_chain[0] == ("ollama", "llama3.2:3b")
 
 
 def test_router_override(router):

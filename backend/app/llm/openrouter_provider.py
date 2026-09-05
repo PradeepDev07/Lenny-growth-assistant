@@ -10,9 +10,9 @@ from backend.app.llm.base import BaseLLMProvider, LLMResponse
 class OpenRouterProvider(BaseLLMProvider):
     """OpenRouter Provider for unified access to Claude, GPT-4o, Llama, etc."""
 
-    def __init__(self, model: str = "anthropic/claude-3.7-sonnet", api_key: Optional[str] = None):
-        super().__init__(model=model)
-        self.api_key = api_key or settings.OPENROUTER_API_KEY
+    def __init__(self, model: Optional[str] = None, api_key: Optional[str] = None):
+        super().__init__(model=model or settings.MODEL_FOR_ESSAY)
+        self.api_key = settings.OPENROUTER_API_KEY if api_key is None else api_key
         self.base_url = "https://openrouter.ai/api/v1/chat/completions"
 
     async def is_available(self) -> bool:

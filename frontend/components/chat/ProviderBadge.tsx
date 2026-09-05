@@ -23,13 +23,22 @@ export const ProviderBadge: React.FC<ProviderBadgeProps> = ({ modelInfo }) => {
   };
 
   const getDisplayName = (provider: string, model: string) => {
-    if (provider === "gemini") return "Gemini 2.0 Flash";
+    if (provider === "gemini") {
+      if (model.includes("flash-lite")) return "Gemini 2.5 Flash Lite (Free)";
+      if (model.includes("2.5-flash")) return "Gemini 2.5 Flash (Free)";
+      if (model.includes("2.0-flash")) return "Gemini 2.0 Flash";
+      return `Gemini (${model})`;
+    }
     if (provider === "openrouter") {
+      if (model === "openrouter/free") return "OpenRouter (Free)";
       if (model.includes("claude")) return "Claude 3.7 (OpenRouter)";
       if (model.includes("gpt-4o")) return "GPT-4o (OpenRouter)";
       return `OpenRouter (${model.split("/").pop()})`;
     }
-    if (provider === "ollama") return `Ollama (${model})`;
+    if (provider === "ollama") {
+      if (model.includes("3.2")) return "Ollama (Llama 3.2 3B)";
+      return `Ollama (${model})`;
+    }
     return `${provider} · ${model}`;
   };
 

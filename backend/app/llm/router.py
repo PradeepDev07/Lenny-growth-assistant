@@ -16,17 +16,17 @@ class ModelRouter:
     DEFAULT_CHAINS: Dict[str, List[Tuple[str, str]]] = {
         "retrieval_qa": [
             ("gemini", settings.MODEL_FOR_RETRIEVAL_QA),
-            ("openrouter", "anthropic/claude-3.5-sonnet"),
+            ("openrouter", settings.MODEL_FOR_ESSAY),
             ("ollama", settings.MODEL_FOR_OFFLINE),
         ],
         "essay_generation": [
             ("openrouter", settings.MODEL_FOR_ESSAY),
-            ("gemini", "gemini-2.0-flash"),
+            ("gemini", settings.MODEL_FOR_RETRIEVAL_QA),
             ("ollama", settings.MODEL_FOR_OFFLINE),
         ],
         "artifact_generation": [
             ("gemini", settings.MODEL_FOR_ARTIFACT),
-            ("openrouter", "openai/gpt-4o"),
+            ("openrouter", settings.MODEL_FOR_ESSAY),
             ("ollama", settings.MODEL_FOR_OFFLINE),
         ],
         "intent_routing": [
@@ -57,7 +57,7 @@ class ModelRouter:
 
     def get_chain_for_task(self, task: str) -> List[Tuple[str, str]]:
         """Return the prioritized list of (provider, model) pairs for a task."""
-        chain = list(self.DEFAULT_CHAINS.get(task, [("gemini", "gemini-2.0-flash"), ("ollama", settings.MODEL_FOR_OFFLINE)]))
+        chain = list(self.DEFAULT_CHAINS.get(task, [("gemini", settings.MODEL_FOR_RETRIEVAL_QA), ("ollama", settings.MODEL_FOR_OFFLINE)]))
         if task in self.task_overrides:
             override = self.task_overrides[task]
             # Place override at the head of the chain if not already there

@@ -10,9 +10,9 @@ from backend.app.llm.base import BaseLLMProvider, LLMResponse
 class GeminiProvider(BaseLLMProvider):
     """Google Gemini Provider using direct Google Generative AI REST API."""
 
-    def __init__(self, model: str = "gemini-2.0-flash", api_key: Optional[str] = None):
-        super().__init__(model=model)
-        self.api_key = api_key or settings.GEMINI_API_KEY
+    def __init__(self, model: Optional[str] = None, api_key: Optional[str] = None):
+        super().__init__(model=model or settings.MODEL_FOR_RETRIEVAL_QA)
+        self.api_key = settings.GEMINI_API_KEY if api_key is None else api_key
         self.base_url = "https://generativelanguage.googleapis.com/v1beta"
 
     async def is_available(self) -> bool:

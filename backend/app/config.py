@@ -17,10 +17,15 @@ class Settings(BaseSettings):
     OLLAMA_BASE_URL: str = "http://localhost:11434"
 
     # Default Task-to-Model Mappings (Configurable via UI / API)
-    MODEL_FOR_INTENT_ROUTING: str = "gemini-2.0-flash"
-    MODEL_FOR_RETRIEVAL_QA: str = "gemini-2.0-flash"
-    MODEL_FOR_ESSAY: str = "anthropic/claude-3.7-sonnet"
-    MODEL_FOR_ARTIFACT: str = "gemini-2.0-flash"
+    # Google Gemini — free tier
+    MODEL_FOR_INTENT_ROUTING: str = "gemini-2.5-flash-lite"
+    MODEL_FOR_RETRIEVAL_QA: str = "gemini-2.5-flash"
+    MODEL_FOR_ARTIFACT: str = "gemini-2.5-flash"
+
+    # OpenRouter — free models only
+    MODEL_FOR_ESSAY: str = "openrouter/free"
+
+    # Local Ollama — completely offline
     MODEL_FOR_OFFLINE: str = "llama3.2:3b"
 
     # CORS

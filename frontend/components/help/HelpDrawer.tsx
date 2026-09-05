@@ -255,7 +255,7 @@ export const HelpDrawer: React.FC<HelpDrawerProps> = ({
               <div className="p-3.5 rounded-xl bg-surface-100 border border-surface-200 space-y-2">
                 <span className="font-semibold text-zinc-100 block">Why Google Gemini?</span>
                 <p className="text-zinc-400 text-[11px] leading-relaxed">
-                  Gemini 2.0 Flash is the primary model for Retrieval QA due to its huge context window (holding multiple transcript chunks) and sub-second token generation latency.
+                  Google Gemini 2.5 Flash and 2.5 Flash Lite provide fast, accurate answers grounded in Lenny's podcast repository with massive context windows on the 100% free tier.
                 </p>
                 <span className="inline-block px-2 py-0.5 rounded bg-emerald-950/50 text-emerald-400 border border-emerald-800/40 text-[10px] font-semibold">
                   100% Free Tier (No credit card needed)
@@ -297,8 +297,11 @@ export const HelpDrawer: React.FC<HelpDrawerProps> = ({
               <div className="p-3.5 rounded-xl bg-surface-100 border border-surface-200 space-y-2">
                 <span className="font-semibold text-zinc-100 block">Why OpenRouter?</span>
                 <p className="text-zinc-400 text-[11px] leading-relaxed">
-                  OpenRouter gives unified access to top reasoning models like Claude 3.7 Sonnet and GPT-4o, used specifically by the Ship 30/30 skill for exceptional long-form narrative quality.
+                  OpenRouter gives access to high-quality free models via <code className="text-primary font-mono">openrouter/free</code> (Meta Llama 3.3, Gemini Exp Free, Mistral) for long-form Ship 30/30 narrative generation with zero credit costs.
                 </p>
+                <span className="inline-block px-2 py-0.5 rounded bg-purple-950/50 text-purple-400 border border-purple-800/40 text-[10px] font-semibold">
+                  Free Tier Router (Zero Cost)
+                </span>
               </div>
 
               <div className="space-y-1.5">

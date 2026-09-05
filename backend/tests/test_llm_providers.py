@@ -51,7 +51,7 @@ async def test_gemini_provider_mocked_generate():
         assert isinstance(res, LLMResponse)
         assert res.text == "Hello, I am Gemini!"
         assert res.provider == "gemini"
-        assert res.model == "gemini-2.0-flash"
+        assert res.model == "gemini-2.5-flash"
 
 
 @pytest.mark.asyncio

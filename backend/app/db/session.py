@@ -4,8 +4,19 @@ from backend.app.config import settings
 
 db_url = settings.DATABASE_URL
 connect_args = {}
+
+# If PostgreSQL is configured but unreachable (e.g. running locally without Docker), fallback gracefully to SQLite
 if db_url.startswith("sqlite"):
     connect_args = {"check_same_thread": False}
+else:
+    try:
+        test_engine = create_engine(db_url, connect_args={"connect_timeout": 1} if "postgresql" in db_url else {})
+        with test_engine.connect() as conn:
+            pass
+        test_engine.dispose()
+    except Exception:
+        db_url = "sqlite:///./growth_assistant.db"
+        connect_args = {"check_same_thread": False}
 
 engine = create_engine(
     db_url,

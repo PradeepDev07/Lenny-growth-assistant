@@ -106,9 +106,10 @@ PYTHONPATH=. pytest backend/tests/ -v
 
 | Task | Primary Provider | Fallback Chain |
 |---|---|---|
-| `retrieval_qa` | Gemini 2.0 Flash | OpenRouter (Claude 3.5 Sonnet) -> Ollama (llama3.2:3b) |
-| `essay_generation` | OpenRouter (Claude 3.7 Sonnet) | Gemini 2.0 Flash -> Ollama (llama3.2:3b) |
-| `artifact_generation` | Gemini 2.0 Flash | OpenRouter (GPT-4o) -> Ollama (llama3.2:3b) |
+| `retrieval_qa` | Gemini 2.5 Flash | OpenRouter (openrouter/free) -> Ollama (llama3.2:3b) |
+| `essay_generation` | OpenRouter (openrouter/free) | Gemini 2.5 Flash -> Ollama (llama3.2:3b) |
+| `artifact_generation` | Gemini 2.5 Flash | OpenRouter (openrouter/free) -> Ollama (llama3.2:3b) |
+| `intent_routing` | Gemini 2.5 Flash Lite | Ollama (llama3.2:3b) |
 | `offline_demo_mode` | Ollama (llama3.2:3b) | Local rule-based responses |
 
 To change models dynamically at runtime, open the **Model Settings** drawer in the UI or send a `POST /config` request.

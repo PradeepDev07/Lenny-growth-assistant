@@ -57,10 +57,10 @@ This document synthesizes `Lenny growth assistant guide.MD` and `Lenny growth as
 
 | Task Type | Primary Provider & Model | Secondary Fallback | Final Local Fallback | Rationale |
 |---|---|---|---|---|
-| `retrieval_qa` | **Gemini 2.0 Flash** | OpenRouter (`anthropic/claude-3.5-sonnet`) | Ollama (`llama3.2:3b`) | Massive context window for multiple transcript chunks, ultra-low latency, grounded generation. |
-| `essay_generation` | **OpenRouter** (`anthropic/claude-3.7-sonnet` or `openai/gpt-4o`) | Gemini Pro | Ollama (`llama3.2:3b`) | Deep synthesis, long-form narrative cadence matching Ship 30/30 rubric. |
-| `artifact_generation` | **Gemini 2.0 Flash** / OpenRouter | OpenRouter (`gpt-4o`) | Ollama (`llama3.2:3b`) | High syntax fidelity for HTML/CSS/JS and Markdown code generation. |
-| `intent_routing` | **Gemini 2.0 Flash** | Ollama (`llama3.2:3b`) | Rule-based regex heuristic | Fast, deterministic classification of prompt intentions. |
+| `retrieval_qa` | **Gemini 2.5 Flash** | OpenRouter (`openrouter/free`) | Ollama (`llama3.2:3b`) | Massive context window for multiple transcript chunks, ultra-low latency, grounded generation. |
+| `essay_generation` | **OpenRouter** (`openrouter/free`) | Gemini 2.5 Flash | Ollama (`llama3.2:3b`) | Free routing across top open-weight models for long-form narrative cadence matching Ship 30/30 rubric. |
+| `artifact_generation` | **Gemini 2.5 Flash** | OpenRouter (`openrouter/free`) | Ollama (`llama3.2:3b`) | High syntax fidelity for HTML/CSS/JS and Markdown code generation. |
+| `intent_routing` | **Gemini 2.5 Flash Lite** | Ollama (`llama3.2:3b`) | Rule-based regex heuristic | Fast, deterministic classification of prompt intentions with zero latency overhead. |
 | `offline_demo_mode` | **Ollama** (`llama3.2:3b`) | Rule-based responses | None | Completely air-gapped demo capability without cloud keys. |
 
 ---
