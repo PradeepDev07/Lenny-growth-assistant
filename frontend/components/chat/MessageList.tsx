@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Message, Source, ModelInfo } from "@/lib/types";
 import { ProviderBadge } from "./ProviderBadge";
 import { SourceCard } from "./SourceCard";
+import { MarkdownContent } from "./MarkdownContent";
 import { PenTool, Box, User, Sparkles, Loader2 } from "lucide-react";
 
 interface MessageListProps {
@@ -66,7 +67,11 @@ export const MessageList: React.FC<MessageListProps> = ({
             >
               {!isUser && msg.model_info && <ProviderBadge modelInfo={msg.model_info} />}
 
-              <div className="whitespace-pre-wrap break-words">{msg.content}</div>
+              {isUser ? (
+                <div className="whitespace-pre-wrap break-words">{msg.content}</div>
+              ) : (
+                <MarkdownContent content={msg.content} />
+              )}
 
               {!isUser && msg.sources && <SourceCard sources={msg.sources} />}
 
@@ -108,13 +113,13 @@ export const MessageList: React.FC<MessageListProps> = ({
           <div className="rounded-2xl rounded-bl-none px-4 py-3.5 max-w-2xl text-sm leading-relaxed bg-surface-50 border border-surface-200 text-zinc-200 shadow-sm">
             {streamingModelInfo && <ProviderBadge modelInfo={streamingModelInfo} />}
 
-            <div className="whitespace-pre-wrap break-words">
-              {streamingContent || (
-                <span className="flex items-center gap-2 text-zinc-400">
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" /> Retrieving grounded transcripts...
-                </span>
-              )}
-            </div>
+            {streamingContent ? (
+              <MarkdownContent content={streamingContent} isStreaming={true} />
+            ) : (
+              <span className="flex items-center gap-2 text-zinc-400">
+                <Loader2 className="w-3.5 h-3.5 animate-spin" /> Retrieving grounded transcripts...
+              </span>
+            )}
 
             {streamingSources.length > 0 && <SourceCard sources={streamingSources} />}
           </div>

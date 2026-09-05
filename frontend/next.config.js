@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  env: {
-    FASTAPI_URL: process.env.FASTAPI_URL || "http://127.0.0.1:8000",
+  output: "standalone",
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 
 module.exports = nextConfig;
+

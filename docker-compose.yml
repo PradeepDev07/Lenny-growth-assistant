@@ -35,6 +35,12 @@ services:
         condition: service_healthy
       ollama:
         condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
 
   frontend:
     build:
@@ -48,7 +54,8 @@ services:
       - FASTAPI_URL=http://backend:8000
       - NEXT_PUBLIC_API_URL=/api
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
 
   ollama:
     image: ollama/ollama:latest

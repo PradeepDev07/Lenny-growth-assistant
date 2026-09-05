@@ -94,6 +94,7 @@ PYTHONPATH=. pytest backend/tests/ -v
 
 ## Documentation
 
+- [**Production Deployment Guide**](file:///Users/macki/Desktop/Assement/Lenny-growth-assistant/docs/deployment.md): VPS Docker Compose, Caddy SSL, Vercel + Render/Neon setups.
 - [**PRD & Discovery Brief**](file:///Users/macki/Desktop/Assement/Lenny-growth-assistant/docs/PRD.md): Persona definitions, success metrics, and scope boundaries.
 - [**System Architecture**](file:///Users/macki/Desktop/Assement/Lenny-growth-assistant/docs/architecture.md): Database schemas, API endpoints, and sandbox security specs.
 - [**Design Guidelines**](file:///Users/macki/Desktop/Assement/Lenny-growth-assistant/docs/design.md): UI wireframes, IA, and interaction states.

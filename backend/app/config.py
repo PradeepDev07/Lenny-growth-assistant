@@ -1,5 +1,6 @@
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, List, Optional
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # Resolve absolute path to root .env
@@ -39,6 +40,19 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3000",
         "http://localhost:8000",
     ]
+
+    @field_validator("CORS_ORIGINS", mode="before")
+    @classmethod
+    def parse_cors_origins(cls, v: Any) -> Any:
+        if isinstance(v, str):
+            if v.strip().startswith("["):
+                import json
+                try:
+                    return json.loads(v)
+                except Exception:
+                    pass
+            return [origin.strip() for origin in v.split(",") if origin.strip()]
+        return v
 
     model_config = SettingsConfigDict(
         env_file=(_ROOT_ENV, ".env", "../.env"),
