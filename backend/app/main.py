@@ -4,12 +4,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 
+from sqlalchemy import text
 from backend.app.config import settings
+from backend.app.db.session import init_db, SessionLocal
+from backend.app.api.sessions import router as sessions_router
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup tasks
+    # Initialize tables
+    init_db()
     yield
     # Shutdown tasks
 
@@ -31,12 +35,24 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include API Routers
+app.include_router(sessions_router)
+
 
 @app.get("/health")
 async def health_check():
     """Health check endpoint exposing system, DB, Ollama, and Cloud LLM status."""
-    db_ok = True  # Verified further in Phase 3
+    db_ok = False
+    try:
+        db = SessionLocal()
+        db.execute(text("SELECT 1"))
+        db.close()
+        db_ok = True
+    except Exception:
+        db_ok = False
+
     ollama_ok = False
+
 
     # Check Ollama connectivity with short timeout
     try:
